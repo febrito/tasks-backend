@@ -34,6 +34,15 @@ pipeline {
                 deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8081/')], contextPath: 'target/tasks', war: 'target/tasks-backend.war'
             }
         }
+        stage ('API Test') {
+            steps{
+                dir('api-tes') {
+                    git credentialsId: 'github_login', url: 'https://github.com/febrito/tasks-api-test'
+                    sh 'mvn test'
+                
+                }
+            }
+        }
     }
 }
 
