@@ -43,6 +43,15 @@ pipeline {
                 }
             }
         }
+
+        stage ('Deploy Frontend') {
+            steps {
+                dir('frontend') 
+                git credentialsId: 'github_login', url: 'https://github.com/febrito/tasks-api-test'
+                 sh 'mvn clean package'
+                deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8081/')], contextPath: 'tasks', war: 'target/tasks.war'
+            }
+        }
     }
 }
 
