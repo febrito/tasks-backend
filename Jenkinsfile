@@ -84,7 +84,7 @@ pipeline {
         fixed {
             emailext attachLog: true, body: 'See attached log below', subject: 'Build is fine', to: 'flooralaminados@gmail.com'
             
+        }
     }
+
 }
-
-
